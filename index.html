@@ -94,10 +94,7 @@
             <h1 class="text-2xl font-bold mt-2">Daily Activity BPR R3</h1>
             <p class="mt-1">Monitoring daily activity section BPR R3</p>
         </div>
-        <form action="https://script.google.com/macros/s/AKfycbyTUl22Dd-53yt1Scg4jPeGS5vJV3OZ0maEU6t_qSnS7GpRJ0SQV4JF-n6ZkczdkA2k_w/exec"
-              method="POST"
-              onsubmit="handleSubmit(event)"
-              class="p-4 space-y-6">
+        <form class="p-4 space-y-6" onsubmit="handleSubmit(event)">
             <div>
                 <label class="block text-sm font-medium text-gray-700">Nama<span class="text-red-500">*</span></label>
                 <input type="text" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" placeholder="Masukkan nama" required>
@@ -142,7 +139,7 @@
                 <div class="p-4 space-y-6">
                     <div>
                         <label class="block text-sm font-medium text-gray-700">Aktivitas<span class="text-red-500">*</span></label>
-                        <textarea class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" placeholder="Masukkan aktivitas apa yang dikerjakan hari ini" required></textarea>
+                        <textarea name="aktivitas" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" placeholder="Masukkan aktivitas apa yang dikerjakan hari ini" required></textarea>
                     </div>
                 </div>
             </div>
@@ -154,7 +151,7 @@
                 <div class="p-4 space-y-6">
                     <div>
                         <label class="block text-sm font-medium text-gray-700">Remark<span class="text-red-500">*</span></label>
-                        <textarea class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" placeholder="Masukkan alasan kenapa tidak hadir" required></textarea>
+                        <textarea name="remark" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" placeholder="Masukkan alasan kenapa tidak hadir" required></textarea>
                     </div>
                 </div>
             </div>
