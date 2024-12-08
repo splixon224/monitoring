@@ -88,8 +88,11 @@
 <body class="bg-purple-100 p-4">
     <div class="max-w-3xl mx-auto bg-white rounded-lg shadow-md">
         <div class="bg-blue-300 text-white p-4 rounded-t-lg">
-            <h1 class="text-2xl font-bold mt-2">Form Kehadiran dan Aktivitas</h1>
-            <p class="mt-1">Isikan data kehadiran dan aktivitas Anda hari ini</p>
+            <h1 class="text-2xl font-bold mt-2">Daily Activity BPR R3</h1>
+            <p class="mt-1">Monitoring daily activity tester BPR R3</p>
+            <blockquote class="mt-4 italic border-l-4 border-gray-300 pl-4">
+              "Omnis responsibilitas in manibus meis."
+            </blockquote>
         </div>
         <form class="p-4 space-y-6" onsubmit="handleSubmit(event)">
             <div>
@@ -136,7 +139,7 @@
                 <label for="remark" class="block text-sm font-medium text-gray-700">Remark</label>
                 <textarea id="remark" name="remark" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" rows="3" placeholder="Berikan alasan mengapa Anda tidak hadir"></textarea>
             </div>
-            <div>
+            <div class="flex justify-center">
                 <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md">Submit</button>
             </div>
         </form>
