@@ -7,7 +7,21 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <script>
-        // Fungsi untuk memvalidasi input tanggal dan waktu
+        function updateSection() {
+            const hadir = document.getElementById('hadir').checked;
+            const tidakHadir = document.getElementById('tidak-hadir').checked;
+            const section2 = document.getElementById('section-2');
+            const section3 = document.getElementById('section-3');
+
+            if (hadir) {
+                section2.classList.remove('hidden');
+                section3.classList.add('hidden');
+            } else if (tidakHadir) {
+                section2.classList.add('hidden');
+                section3.classList.remove('hidden');
+            }
+        }
+
         function validateDate() {
             const dateInput = document.getElementById('date-input');
             const timeInput = document.getElementById('time-input');
@@ -29,7 +43,6 @@
             return true;
         }
 
-        // Fungsi untuk mengirim data ke Google Apps Script
         async function handleSubmit(event) {
             event.preventDefault(); // Mencegah form untuk melakukan submit default
 
@@ -55,7 +68,7 @@
                 };
 
                 try {
-                    const response = await fetch('https://script.google.com/macros/s/AKfycbwrxjDu_mPyZITT9GpYrFPCQB3oVj4ugMv5jCV6Fpn2Ac-9kW4254PJ4TZchwCS6huCBQ/exec', {
+                    const response = await fetch('https://script.google.com/macros/s/AKfycbxAbUyZ4XLaxFLt-raJtqjf01gowlP6P_HnijpNC8XaOffMeJeBxvKa501UeL0c1v4pGA/exec', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
@@ -83,8 +96,8 @@
 <body class="bg-purple-100 p-4">
     <div class="max-w-3xl mx-auto bg-white rounded-lg shadow-md">
         <div class="bg-blue-300 text-white p-4 rounded-t-lg">
-            <h1 class="text-2xl font-bold mt-2">Daily Activity BPR R3</h1>
-            <p class="mt-1">Monitoring daily activity BPR R3</p>
+            <h1 class="text-2xl font-bold mt-2">Form Kehadiran dan Aktivitas</h1>
+            <p class="mt-1">Isikan data kehadiran dan aktivitas Anda hari ini</p>
         </div>
         <form class="p-4 space-y-6" onsubmit="handleSubmit(event)">
             <div>
