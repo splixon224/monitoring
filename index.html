@@ -1,24 +1,13 @@
+<!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daily Activity BPR R3</title>
+    <title>Form Kehadiran dan Aktivitas</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <script>
-        function updateSection() {
-            const hadir = document.getElementById('hadir').checked;
-            const section2 = document.getElementById('section-2');
-            const section3 = document.getElementById('section-3');
-            if (hadir) {
-                section2.classList.remove('hidden');
-                section3.classList.add('hidden');
-            } else {
-                section2.classList.add('hidden');
-                section3.classList.remove('hidden');
-            }
-        }
-
+        // Fungsi untuk memvalidasi input tanggal dan waktu
         function validateDate() {
             const dateInput = document.getElementById('date-input');
             const timeInput = document.getElementById('time-input');
@@ -28,23 +17,24 @@
             const timePattern = /^([01]\d|2[0-3]):([0-5]\d)$/;
 
             if (!datePattern.test(dateValue)) {
-                alert('Harap masukkan tanggal dengan format YYYY-MM-DD');
+                alert('Harap masukkan tanggal dalam format YYYY-MM-DD');
                 return false;
             }
 
             if (!timePattern.test(timeValue)) {
-                alert('Harap masukkan waktu dengan format HH:MM');
+                alert('Harap masukkan waktu dalam format HH:MM');
                 return false;
             }
 
             return true;
         }
 
+        // Fungsi untuk mengirim data ke Google Apps Script
         async function handleSubmit(event) {
-            event.preventDefault();
+            event.preventDefault(); // Mencegah form untuk melakukan submit default
 
             if (validateDate()) {
-                // Ambil data dari form
+                // Mengambil data dari form
                 const nama = document.querySelector('input[type="text"]').value;
                 const date = document.getElementById('date-input').value;
                 const time = document.getElementById('time-input').value;
@@ -65,7 +55,7 @@
                 };
 
                 try {
-                    const response = await fetch('https://script.google.com/macros/s/AKfycbyTUl22Dd-53yt1Scg4jPeGS5vJV3OZ0maEU6t_qSnS7GpRJ0SQV4JF-n6ZkczdkA2k_w/exec', {
+                    const response = await fetch('https://script.google.com/macros/s/AKfycbwrxjDu_mPyZITT9GpYrFPCQB3oVj4ugMv5jCV6Fpn2Ac-9kW4254PJ4TZchwCS6huCBQ/exec', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
@@ -75,10 +65,12 @@
 
                     if (response.ok) {
                         alert('Form berhasil dikirim!');
-                        window.location.href = 'submit.html'; // Redirect ke halaman submit.html
+                        // Redirect ke halaman submit.html
+                        window.location.href = 'submit.html';
                     } else {
-                        console.error('Error response:', response.status, response.statusText);
-                        alert('Gagal mengirim form.');
+                        const errorData = await response.text();
+                        console.error('Error response:', errorData);
+                        alert('Gagal mengirim form. Silakan coba lagi.');
                     }
                 } catch (error) {
                     console.error('Fetch error:', error);
@@ -92,7 +84,7 @@
     <div class="max-w-3xl mx-auto bg-white rounded-lg shadow-md">
         <div class="bg-blue-300 text-white p-4 rounded-t-lg">
             <h1 class="text-2xl font-bold mt-2">Daily Activity BPR R3</h1>
-            <p class="mt-1">Monitoring daily activity tester BPR R3</p>
+            <p class="mt-1">Monitoring daily activity BPR R3</p>
         </div>
         <form class="p-4 space-y-6" onsubmit="handleSubmit(event)">
             <div>
@@ -102,8 +94,8 @@
             <div>
                 <label class="block text-sm font-medium text-gray-700">Tanggal<span class="text-red-500">*</span></label>
                 <div class="flex space-x-4 mt-1">
-                    <input type="date" id="date-input" class="block w-1/2 border border-gray-300 rounded-md shadow-sm p-2" placeholder="YYYY-MM-DD" required>
-                    <input type="time" id="time-input" class="block w-1/2 border border-gray-300 rounded-md shadow-sm p-2" placeholder="HH:MM" required>
+                    <input type="date" id="date-input" class="block w-1/2 border border-gray-300 rounded-md shadow-sm p-2" required>
+                    <input type="time" id="time-input" class="block w-1/2 border border-gray-300 rounded-md shadow-sm p-2" required>
                 </div>
             </div>
             <div>
