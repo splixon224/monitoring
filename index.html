@@ -66,6 +66,8 @@
                 // Menambahkan data ke koleksi 'kehadiran' di Firestore
                 const docRef = await addDoc(collection(db, 'kehadiran'), formData);
                 alert('Data berhasil disimpan!');
+                // Redirect ke submit.html setelah submit berhasil
+                window.location.href = 'submit.html';
                 event.target.reset(); // Reset form setelah submit
             } catch (error) {
                 console.error('Terjadi kesalahan:', error);
