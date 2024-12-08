@@ -4,17 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Form Kehadiran dan Aktivitas</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="output.css">
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&display=swap">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    <!-- Firebase SDK -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js";
         import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-firestore.js";
 
-        // Konfigurasi Firebase
         const firebaseConfig = {
             apiKey: "AIzaSyBXFP_L-mnKVuODqFIp2w77ct1Wi9o5hUg",
             authDomain: "dailyactivity-778ae.firebaseapp.com",
@@ -24,7 +24,6 @@
             appId: "1:748933409438:web:04a89839a13bdb9989298f"
         };
 
-        // Inisialisasi Firebase
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
