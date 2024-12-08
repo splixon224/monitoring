@@ -91,14 +91,15 @@
             }
         }
 
-        function updateSection() {
+        // Tambahkan fungsi updateSection ke window agar bisa diakses secara global
+        window.updateSection = function() {
             const hadir = document.getElementById('hadir').checked;
             const section2 = document.getElementById('section-2');
             const section3 = document.getElementById('section-3');
 
             section2.classList.toggle('hidden', !hadir);
             section3.classList.toggle('hidden', hadir);
-        }
+        };
     </script>
 </head>
 <body class="bg-purple-100 p-4">
