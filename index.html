@@ -5,81 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Form Kehadiran dan Aktivitas</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!--<link href="dist/styles.css" rel="stylesheet"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Definisi fungsi JavaScript di sini -->
-    <script>
-        function updateSection() {
-            const hadir = document.getElementById('hadir').checked;
-            const section2 = document.getElementById('section-2');
-            const section3 = document.getElementById('section-3');
-
-            section2.classList.toggle('hidden', !hadir);
-            section3.classList.toggle('hidden', hadir);
-        }
-    </script>
-</head>
-<body class="bg-purple-100 p-4">
-    <div class="max-w-3xl mx-auto bg-white rounded-lg shadow-md">
-        <div class="bg-blue-300 text-white p-4 rounded-t-lg">
-            <h1 class="text-2xl font-bold mt-2">Form Kehadiran dan Aktivitas</h1>
-            <p class="mt-1">Isikan data kehadiran dan aktivitas Anda hari ini</p>
-        </div>
-        <form class="p-4 space-y-6" onsubmit="handleSubmit(event)">
-            <div>
-                <label class="block text-sm font-medium text-gray-700">Nama<span class="text-red-500">*</span></label>
-                <input type="text" name="nama" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" placeholder="Masukkan nama" required>
-            </div>
-            <div>
-                <label class="block text-sm font-medium text-gray-700">Tanggal<span class="text-red-500">*</span></label>
-                <div class="flex space-x-4 mt-1">
-                    <input type="date" id="date-input" class="block w-1/2 border border-gray-300 rounded-md shadow-sm p-2" required>
-                    <input type="time" id="time-input" class="block w-1/2 border border-gray-300 rounded-md shadow-sm p-2" required>
-                </div>
-            </div>
-            <div>
-                <label class="block text-sm font-medium text-gray-700">Project<span class="text-red-500">*</span></label>
-                <select name="project" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required>
-                    <option value="">Pilih Project</option>
-                    <option>Collection KUM</option>
-                    <option>Collection Retail</option>
-                    <option>Collection SME</option>
-                    <option>Hygiene</option>
-                    <option>ORP Portal</option>
-                    <option>WFMS</option>
-                </select>
-            </div>
-            <div>
-                <label class="block text-sm font-medium text-gray-700">Kehadiran<span class="text-red-500">*</span></label>
-                <div class="mt-1 space-y-2">
-                    <div>
-                        <input type="radio" id="hadir" name="kehadiran" value="Hadir" class="mr-2" onclick="updateSection()" required>
-                        <label for="hadir">Hadir</label>
-                    </div>
-                    <div>
-                        <input type="radio" id="tidak-hadir" name="kehadiran" value="Tidak Hadir" class="mr-2" onclick="updateSection()" required>
-                        <label for="tidak-hadir">Tidak Hadir</label>
-                    </div>
-                </div>
-            </div>
-            <div id="section-2" class="hidden">
-                <label class="block text-sm font-medium text-gray-700">Aktivitas</label>
-                <textarea name="aktivitas" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" rows="3"></textarea>
-            </div>
-            <div id="section-3" class="hidden">
-                <label class="block text-sm font-medium text-gray-700">Remark</label>
-                <textarea name="remark" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" rows="3"></textarea>
-            </div>
-            <div>
-                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md">Submit</button>
-            </div>
-        </form>
-    </div>
-
-    <!-- Firebase SDK dan kode lainnya -->
+    <!-- Firebase SDK -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js";
         import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-firestore.js";
@@ -160,6 +90,72 @@
                 }
             }
         }
+
+        function updateSection() {
+            const hadir = document.getElementById('hadir').checked;
+            const section2 = document.getElementById('section-2');
+            const section3 = document.getElementById('section-3');
+
+            section2.classList.toggle('hidden', !hadir);
+            section3.classList.toggle('hidden', hadir);
+        }
     </script>
+</head>
+<body class="bg-purple-100 p-4">
+    <div class="max-w-3xl mx-auto bg-white rounded-lg shadow-md">
+        <div class="bg-blue-300 text-white p-4 rounded-t-lg">
+            <h1 class="text-2xl font-bold mt-2">Form Kehadiran dan Aktivitas</h1>
+            <p class="mt-1">Isikan data kehadiran dan aktivitas Anda hari ini</p>
+        </div>
+        <form class="p-4 space-y-6" onsubmit="handleSubmit(event)">
+            <div>
+                <label for="nama" class="block text-sm font-medium text-gray-700">Nama<span class="text-red-500">*</span></label>
+                <input type="text" id="nama" name="nama" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" placeholder="Masukkan nama" required>
+            </div>
+            <div>
+                <label for="date-input" class="block text-sm font-medium text-gray-700">Tanggal<span class="text-red-500">*</span></label>
+                <div class="flex space-x-4 mt-1">
+                    <input type="date" id="date-input" class="block w-1/2 border border-gray-300 rounded-md shadow-sm p-2" required>
+                    <input type="time" id="time-input" class="block w-1/2 border border-gray-300 rounded-md shadow-sm p-2" required>
+                </div>
+            </div>
+            <div>
+                <label for="project" class="block text-sm font-medium text-gray-700">Project<span class="text-red-500">*</span></label>
+                <select id="project" name="project" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required>
+                    <option value="">Pilih Project</option>
+                    <option>Collection KUM</option>
+                    <option>Collection Retail</option>
+                    <option>Collection SME</option>
+                    <option>Hygiene</option>
+                    <option>ORP Portal</option>
+                    <option>WFMS</option>
+                </select>
+            </div>
+            <div>
+                <label for="hadir" class="block text-sm font-medium text-gray-700">Kehadiran<span class="text-red-500">*</span></label>
+                <div class="mt-1 space-y-2">
+                    <div>
+                        <input type="radio" id="hadir" name="kehadiran" value="Hadir" class="mr-2" onclick="updateSection()" required>
+                        <label for="hadir">Hadir</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="tidak-hadir" name="kehadiran" value="Tidak Hadir" class="mr-2" onclick="updateSection()" required>
+                        <label for="tidak-hadir">Tidak Hadir</label>
+                    </div>
+                </div>
+            </div>
+            <div id="section-2" class="hidden">
+                <label for="aktivitas" class="block text-sm font-medium text-gray-700">Aktivitas</label>
+                <textarea id="aktivitas" name="aktivitas" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" rows="3"></textarea>
+            </div>
+            <div id="section-3" class="hidden">
+                <label for="remark" class="block text-sm font-medium text-gray-700">Remark</label>
+                <textarea id="remark" name="remark" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" rows="3"></textarea>
+            </div>
+            <div>
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md">Submit</button>
+            </div>
+        </form>
+    </div>
 </body>
 </html>
