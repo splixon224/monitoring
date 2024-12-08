@@ -1,8 +1,9 @@
-<html lang="en">
+<!DOCTYPE html>
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daily Activity BPR R3</title>
+    <title>Form Kehadiran dan Aktivitas Tester</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <script>
@@ -28,12 +29,12 @@
             const timePattern = /^([01]\d|2[0-3]):([0-5]\d)$/;
 
             if (!datePattern.test(dateValue)) {
-                alert('Harap masukkan tanggal dengan format YYYY-MM-DD');
+                alert('Harap masukkan tanggal dalam format YYYY-MM-DD');
                 return false;
             }
 
             if (!timePattern.test(timeValue)) {
-                alert('Harap masukkan waktu dengan format HH:MM');
+                alert('Harap masukkan waktu dalam format HH:MM');
                 return false;
             }
 
@@ -65,7 +66,7 @@
                 };
 
                 try {
-                    const response = await fetch('https://script.google.com/macros/s/AKfycby7R6U-sWxnAxBFgr0sz7TApz60mF4M3dqk02ENdNY2qar-zfat6MNL9bLY5ORyD7hUZA/exec', { // Ganti dengan URL endpoint Google Apps Script
+                    const response = await fetch('https://script.google.com/macros/s/AKfycbyj1aB3wC0HdgHBXJPdyUPlL91Y9TcXrNPMxRyTbY59z7IiaKSAVyliAtnLCh_FKO2-yg/exec', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
@@ -74,7 +75,7 @@
                     });
 
                     if (response.ok) {
-                        // Jika data berhasil dikirim, arahkan ke halaman submit.html
+                        alert('Form berhasil dikirim!');
                         window.location.href = 'submit.html';
                     } else {
                         console.error('Error response:', response.status, response.statusText);
@@ -91,8 +92,8 @@
 <body class="bg-purple-100 p-4">
     <div class="max-w-3xl mx-auto bg-white rounded-lg shadow-md">
         <div class="bg-blue-300 text-white p-4 rounded-t-lg">
-            <h1 class="text-2xl font-bold mt-2">Daily Activity BPR R3</h1>
-            <p class="mt-1">Monitoring daily activity section BPR R3</p>
+            <h1 class="text-2xl font-bold mt-2">Form Kehadiran dan Aktivitas Pegawai</h1>
+            <p class="mt-1">Monitoring aktivitas harian pegawai.</p>
         </div>
         <form class="p-4 space-y-6" onsubmit="handleSubmit(event)">
             <div>
