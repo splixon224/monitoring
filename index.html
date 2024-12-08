@@ -34,7 +34,7 @@
         // Contoh penggunaan Firebase Firestore untuk menyimpan data
         async function saveDataToFirestore(data) {
             try {
-                const docRef = await db.collection('data').add(data);
+                const docRef = await db.collection('kehadiran').add(data);
                 console.log('Data berhasil disimpan dengan ID:', docRef.id);
             } catch (error) {
                 console.error('Error menulis document ke Firestore:', error);
@@ -184,7 +184,7 @@
             </div>
 
             <div class="text-center mt-4">
-                <button type="submit" class="px-4 py-2 bg-green-500 text-white rounded-md shadow-md hover:bg-green-600">Kirim</button>
+                <button type="submit" class="px-4 py-2 bg-green-500 text-white rounded-md shadow-md hover:bg-green-600">Submit</button>
             </div>
         </form>
     </div>
