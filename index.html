@@ -7,178 +7,90 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
         body {
-            background-color: #f3e8ff; /* bg-purple-100 */
-            padding: 1rem; /* p-4 */
-            font-family: Arial, sans-serif;
+            background-color: #f3f4f6; /* Warna latar belakang */
+            padding: 1rem;
+            font-family: 'Arial', sans-serif;
         }
         .container {
-            max-width: 768px; /* max-w-3xl */
-            margin: 0 auto;
-            background-color: #ffffff; /* bg-white */
-            border-radius: 0.5rem; /* rounded-lg */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* shadow-md */
+            max-width: 800px;
+            margin: auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
         }
         .header {
-            background-color: #6b5b95; /* bg-purple-600 */
-            color: #ffffff; /* text-white */
-            padding: 1rem; /* p-4 */
-            border-top-left-radius: 0.5rem; /* rounded-t-lg */
-            border-top-right-radius: 0.5rem; /* rounded-t-lg */
+            background-color: #6b21a8; /* Warna ungu gelap */
+            color: #ffffff;
+            padding: 1rem;
+            border-radius: 8px 8px 0 0;
+            text-align: center;
         }
         .header h1 {
-            font-size: 1.5rem; /* text-2xl */
-            font-weight: bold; /* font-bold */
-            margin-top: 0.5rem; /* mt-2 */
-        }
-        .header p {
-            margin-top: 0.25rem; /* mt-1 */
-        }
-        .form-container {
-            padding: 1rem; /* p-4 */
-            gap: 1.5rem; /* space-y-6 */
+            margin: 0;
+            font-size: 1.5rem;
         }
         .form-group {
             margin-bottom: 1rem;
         }
-        .form-group label {
+        label {
             display: block;
-            font-size: 0.875rem; /* text-sm */
-            font-weight: 500; /* font-medium */
-            color: #4a4a4a; /* text-gray-700 */
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #333333;
         }
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            margin-top: 0.25rem; /* mt-1 */
-            width: 100%; /* w-full */
-            border: 1px solid #d1d5db; /* border-gray-300 */
-            border-radius: 0.375rem; /* rounded-md */
-            padding: 0.5rem; /* p-2 */
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); /* shadow-sm */
+        input[type="text"],
+        input[type="date"],
+        input[type="time"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #cccccc;
+            border-radius: 4px;
+            font-size: 1rem;
         }
-        .form-group input[type="date"],
-        .form-group input[type="time"] {
-            width: 48%; /* w-1/2 */
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
         }
-        .form-group input[type="radio"] {
-            margin-right: 0.5rem; /* mr-2 */
+        .radio-group label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
-        .section {
-            display: none; /* hidden */
-            margin-top: 1.5rem; /* mt-6 */
-            background-color: #ffffff; /* bg-white */
-            border-radius: 0.5rem; /* rounded-lg */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* shadow-md */
+        .radio-group input {
+            width: 20px; /* Ukuran radio button */
+            height: 20px;
         }
-        .section-header {
-            background-color: #6b5b95; /* bg-purple-600 */
-            color: #ffffff; /* text-white */
-            padding: 1rem; /* p-4 */
-            border-top-left-radius: 0.5rem; /* rounded-t-lg */
-            border-top-right-radius: 0.5rem; /* rounded-t-lg */
-        }
-        .section-content {
-            padding: 1rem; /* p-4 */
-            gap: 1.5rem; /* space-y-6 */
-        }
-        .button {
-            background-color: #6b5b95; /* bg-purple-600 */
-            color: #ffffff; /* text-white */
-            padding: 0.5rem 1rem; /* px-4 py-2 */
-            border-radius: 0.375rem; /* rounded-md */
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05); /* shadow-sm */
+        .submit-btn {
+            display: block;
+            width: 100%;
+            background-color: #6b21a8; /* Warna ungu gelap */
+            color: #ffffff;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
             cursor: pointer;
-            transition: background-color 0.3s;
+            text-align: center;
         }
-        .button:hover {
-            background-color: #5a4d8b; /* hover:bg-purple-700 */
+        .submit-btn:hover {
+            background-color: #4c1d95; /* Warna ungu yang lebih gelap */
         }
     </style>
-</head>
-<body>
-    <div class="container">
-        <div class="header">
-            <h1>Daily Activity BPR R3</h1>
-            <p>Monitoring daily activity section BPR R3</p>
-        </div>
-        <form class="form-container" onsubmit="handleSubmit(event)">
-            <div class="form-group">
-                <label for="nama">Nama<span style="color: #e11d48;">*</span></label>
-                <input type="text" id="nama" placeholder="Masukkan nama" required>
-            </div>
-            <div class="form-group">
-                <label for="date-input">Tanggal<span style="color: #e11d48;">*</span></label>
-                <div style="display: flex; gap: 1rem;"> <!-- flex space-x-4 -->
-                    <input type="date" id="date-input" placeholder="YYYY-MM-DD" required>
-                    <input type="time" id="time-input" placeholder="HH:MM" required>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="project">Project<span style="color: #e11d48;">*</span></label>
-                <select id="project" required>
-                    <option value="">Pilih Project</option>
-                    <option>Collection KUM</option>
-                    <option>Collection Retail</option>
-                    <option>Collection SME</option>
-                    <option>Hygiene</option>
-                    <option>ORP Portal</option>
-                    <option>WFMS</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>Kehadiran<span style="color: #e11d48;">*</span></label>
-                <div style="display: flex; flex-direction: column; gap: 0.5rem;"> <!-- space-y-2 -->
-                    <label>
-                        <input type="radio" id="hadir" name="kehadiran" onclick="updateSection()" required>
-                        Hadir
-                    </label>
-                    <label>
-                        <input type="radio" id="tidak-hadir" name="kehadiran" onclick="updateSection()" required>
-                        Tidak Hadir
-                    </label>
-                </div>
-            </div>
-
-            <div id="section-2" class="section">
-                <div class="section-header">
-                    <p>Isi Aktivitas</p>
-                </div>
-                <div class="section-content">
-                    <div class="form-group">
-                        <label for="aktivitas">Aktivitas<span style="color: #e11d48;">*</span></label>
-                        <textarea id="aktivitas" placeholder="Masukkan aktivitas apa yang dikerjakan hari ini" required></textarea>
-                    </div>
-                </div>
-            </div>
-
-            <div id="section-3" class="section">
-                <div class="section-header">
-                    <p>Alasan Tidak Hadir</p>
-                </div>
-                <div class="section-content">
-                    <div class="form-group">
-                        <label for="remark">Remark<span style="color: #e11d48;">*</span></label>
-                        <textarea id="remark" placeholder="Masukkan alasan kenapa tidak hadir" required></textarea>
-                    </div>
-                </div>
-            </div>
-
-            <div style="display: flex; justify-content: flex-end;"> <!-- flex justify-end -->
-                <button type="submit" class="button">Submit</button>
-            </div>
-        </form>
-    </div>
     <script>
         function updateSection() {
             const hadir = document.getElementById('hadir').checked;
             const section2 = document.getElementById('section-2');
             const section3 = document.getElementById('section-3');
             if (hadir) {
-                section2.style.display = 'block';
-                section3.style.display = 'none';
+                section2.classList.remove('hidden');
+                section3.classList.add('hidden');
             } else {
-                section2.style.display = 'none';
-                section3.style.display = 'block';
+                section2.classList.add('hidden');
+                section3.classList.remove('hidden');
             }
         }
 
@@ -208,13 +120,13 @@
 
             if (validateDate()) {
                 // Ambil data dari form
-                const nama = document.getElementById('nama').value;
+                const nama = document.querySelector('input[type="text"]').value;
                 const date = document.getElementById('date-input').value;
                 const time = document.getElementById('time-input').value;
-                const project = document.getElementById('project').value;
+                const project = document.querySelector('select').value;
                 const kehadiran = document.querySelector('input[name="kehadiran"]:checked')?.nextSibling.textContent.trim();
-                const aktivitas = document.getElementById('aktivitas')?.value || '';
-                const remark = document.getElementById('remark')?.value || '';
+                const aktivitas = document.querySelector('#section-2 textarea')?.value || '';
+                const remark = document.querySelector('#section-3 textarea')?.value || '';
 
                 // Struktur data untuk dikirim ke Google Apps Script
                 const data = {
@@ -249,5 +161,63 @@
             }
         }
     </script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Daily Activity BPR R3</h1>
+            <p>Monitoring daily activity section BPR R3</p>
+        </div>
+        <form onsubmit="handleSubmit(event)">
+            <div class="form-group">
+                <label>Nama<span style="color: #e11d48;">*</span></label>
+                <input type="text" placeholder="Masukkan nama" required>
+            </div>
+            <div class="form-group">
+                <label>Tanggal<span style="color: #e11d48;">*</span></label>
+                <div style="display: flex; gap: 1rem;">
+                    <input type="date" id="date-input" placeholder="YYYY-MM-DD" required>
+                    <input type="time" id="time-input" placeholder="HH:MM" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Project<span style="color: #e11d48;">*</span></label>
+                <select required>
+                    <option value="">Pilih Project</option>
+                    <option>Collection KUM</option>
+                    <option>Collection Retail</option>
+                    <option>Collection SME</option>
+                    <option>Hygiene</option>
+                    <option>ORP Portal</option>
+                    <option>WFMS</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Kehadiran<span style="color: #e11d48;">*</span></label>
+                <div class="radio-group">
+                    <label>
+                        <input type="radio" id="hadir" name="kehadiran" onclick="updateSection()" required>
+                        <span>Hadir</span>
+                    </label>
+                    <label>
+                        <input type="radio" id="tidak-hadir" name="kehadiran" onclick="updateSection()" required>
+                        <span>Tidak Hadir</span>
+                    </label>
+                </div>
+            </div>
+
+            <div id="section-2" class="form-group hidden">
+                <label>Aktivitas<span style="color: #e11d48;">*</span></label>
+                <textarea placeholder="Masukkan aktivitas apa yang dikerjakan hari ini" required></textarea>
+            </div>
+
+            <div id="section-3" class="form-group hidden">
+                <label>Remark<span style="color: #e11d48;">*</span></label>
+                <textarea placeholder="Masukkan alasan kenapa tidak hadir" required></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn">Submit</button>
+        </form>
+    </div>
 </body>
 </html>
