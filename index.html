@@ -28,12 +28,12 @@
             const timePattern = /^([01]\d|2[0-3]):([0-5]\d)$/;
 
             if (!datePattern.test(dateValue)) {
-                alert('Please enter a valid date in the format YYYY-MM-DD');
+                alert('Harap masukkan tanggal dengan format YYYY-MM-DD');
                 return false;
             }
 
             if (!timePattern.test(timeValue)) {
-                alert('Please enter a valid time in the format HH:MM');
+                alert('Harap masukkan waktu dengan format HH:MM');
                 return false;
             }
 
@@ -74,14 +74,15 @@
                     });
 
                     if (response.ok) {
-                        alert('Form submitted successfully!');
+                        // Jika data berhasil dikirim, arahkan ke halaman submit.html
+                        window.location.href = 'submit.html';
                     } else {
                         console.error('Error response:', response.status, response.statusText);
-                        alert('Failed to submit form.');
+                        alert('Gagal mengirim form.');
                     }
                 } catch (error) {
                     console.error('Fetch error:', error);
-                    alert('An error occurred while submitting the form.');
+                    alert('Terjadi kesalahan saat mengirim form.');
                 }
             }
         }
