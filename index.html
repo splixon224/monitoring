@@ -1,4 +1,5 @@
- <html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -65,7 +66,7 @@
                 };
 
                 try {
-                    const response = await fetch('https://script.google.com/macros/s/AKfycbwhQ34GHEDzzGqiR7torJnCs0LkC5qogVehiXvO_CoiUT0hi7qnX8EP-uQa7ZV7x5RvBg/exec', {
+                    const response = await fetch('https://script.google.com/macros/s/AKfycbyTUl22Dd-53yt1Scg4jPeGS5vJV3OZ0maEU6t_qSnS7GpRJ0SQV4JF-n6ZkczdkA2k_w/exec', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
@@ -76,10 +77,11 @@
                     if (response.ok) {
                         alert('Form submitted successfully!');
                     } else {
+                        console.error('Error response:', response.status, response.statusText);
                         alert('Failed to submit form.');
                     }
                 } catch (error) {
-                    console.error('Error:', error);
+                    console.error('Fetch error:', error);
                     alert('An error occurred while submitting the form.');
                 }
             }
