@@ -32,6 +32,8 @@
             const list = document.getElementById(listId);
             const filter = input.value.toLowerCase();
 
+            // Menampilkan atau menyembunyikan daftar saran
+            list.style.display = filter ? 'block' : 'none';
             list.innerHTML = "";
 
             if (filter) {
