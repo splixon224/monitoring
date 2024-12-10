@@ -10,45 +10,72 @@
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <script>
+    <!-- Firebase SDK -->
+    <script type="module">
+        // Import Firebase modules
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
+        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
+
+        // Konfigurasi Firebase Anda
+        const firebaseConfig = {
+            apiKey: "AIzaSyBXFP_L-mnKVuODqFIp2w77ct1Wi9o5hUg",
+            authDomain: "dailyactivity-778ae.firebaseapp.com",
+            projectId: "dailyactivity-778ae",
+            storageBucket: "dailyactivity-778ae.firebasestorage.app",
+            messagingSenderId: "748933409438",
+            appId: "1:748933409438:web:04a89839a13bdb9989298f",
+            measurementId: "G-CC57DNRVBJ"
+        };
+
+        // Inisialisasi aplikasi Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+
+        // Fungsi untuk menangani pengiriman form
         window.handleSubmit = async (event) => {
             event.preventDefault();
 
             // Ambil data dari form
-            const form = document.getElementById("data-form");
-            const formData = new FormData(form);
+            const nama = document.getElementById('nama').value;
+            const date = document.getElementById('date-input').value;
+            const time = document.getElementById('time-input').value;
+            const project = document.getElementById('project').value;
+            const kehadiran = document.querySelector('input[name="kehadiran"]:checked')?.value;
+            const aktivitas = document.getElementById('aktivitas').value;
+            const remark = document.getElementById('remark').value;
 
-            // Konversi FormData menjadi objek
-            const data = {};
-            formData.forEach((value, key) => {
-                data[key] = value;
-            });
+            if (!kehadiran) {
+                alert('Harap pilih status kehadiran.');
+                return;
+            }
+
+            // Data yang akan disimpan
+            const formData = {
+                nama,
+                date,
+                time,
+                project,
+                kehadiran,
+                aktivitas: kehadiran === 'Hadir' ? aktivitas : null,
+                remark: kehadiran === 'Tidak Hadir' ? remark : null,
+            };
 
             try {
-                const response = await fetch("URL_WEB_APP", { // Ganti URL_WEB_APP dengan URL Web App dari Google Apps Script
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(data),
-                });
-
-                const result = await response.json();
-
-                if (result.result === "success") {
-                    alert("Data berhasil disimpan ke Google Spreadsheet!");
-                    form.reset(); // Reset form setelah submit
-                } else {
-                    console.error(result.error);
-                    alert("Terjadi kesalahan saat menyimpan data.");
-                }
+                // Menambahkan data ke koleksi 'kehadiran' di Firestore
+                const docRef = await addDoc(collection(db, 'kehadiran'), formData);
+                alert('Data berhasil disimpan!');
+                // Redirect ke submit.html setelah submit berhasil
+                window.location.href = 'submit.html';
+                event.target.reset(); // Reset form setelah submit
             } catch (error) {
-                console.error("Error:", error);
-                alert("Gagal mengirim data. Silakan coba lagi.");
+                console.error('Terjadi kesalahan:', error);
+                alert('Gagal mengirim form. Silakan coba lagi.');
             }
         };
 
-        window.updateSection = function () {
+        window.updateSection = function() {
             const hadir = document.getElementById('hadir').checked;
             const section2 = document.getElementById('section-2');
             const section3 = document.getElementById('section-3');
@@ -67,16 +94,16 @@
               "Omnis responsibilitas in manibus meis."
             </blockquote>
         </div>
-        <form id="data-form" class="p-4 space-y-6" onsubmit="handleSubmit(event)">
+        <form class="p-4 space-y-6" onsubmit="handleSubmit(event)">
             <div>
-                <label for="nama" class="block text-sm font-medium text-gray-700">Nama Lengkap<span class="text-red-500">*</span></label>
+                <label for="nama" class="block text-sm font-medium text-gray-700">Nama<span class="text-red-500">*</span></label>
                 <input type="text" id="nama" name="nama" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" placeholder="Masukkan nama" required>
             </div>
             <div>
                 <label for="date-input" class="block text-sm font-medium text-gray-700">Tanggal<span class="text-red-500">*</span></label>
                 <div class="flex space-x-4 mt-1">
-                    <input type="date" id="date-input" name="date" class="block w-1/2 border border-gray-300 rounded-md shadow-sm p-2" required>
-                    <input type="time" id="time-input" name="time" class="block w-1/2 border border-gray-300 rounded-md shadow-sm p-2" required>
+                    <input type="date" id="date-input" class="block w-1/2 border border-gray-300 rounded-md shadow-sm p-2" required>
+                    <input type="time" id="time-input" class="block w-1/2 border border-gray-300 rounded-md shadow-sm p-2" required>
                 </div>
             </div>
             <div>
@@ -106,11 +133,11 @@
             </div>
             <div id="section-2" class="hidden">
                 <label for="aktivitas" class="block text-sm font-medium text-gray-700">Aktivitas</label>
-                <textarea id="aktivitas" name="aktivitas" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" rows="3" placeholder="Masukkan aktivitas apa saja yang Anda lakukan hari ini" required></textarea>
+                <textarea id="aktivitas" name="aktivitas" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" rows="3" placeholder="Masukkan aktivitas apa saja yang Anda lakukan hari ini"></textarea>
             </div>
             <div id="section-3" class="hidden">
                 <label for="remark" class="block text-sm font-medium text-gray-700">Remark</label>
-                <textarea id="remark" name="remark" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" rows="3" placeholder="Berikan alasan mengapa Anda tidak hadir" required></textarea>
+                <textarea id="remark" name="remark" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" rows="3" placeholder="Berikan alasan mengapa Anda tidak hadir"></textarea>
             </div>
             <div class="flex justify-center">
                 <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md">Submit</button>
