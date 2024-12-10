@@ -12,65 +12,65 @@
 
     <script>
         const suggestions = [
-            "Mutia Zahro Utami",
-            "Riva Maulina",
-            "Adrio Welly Rolando",
-            "Agung Pratama",
-            "Dzaki Tristanto",
-            "Madrufi",
-            "Muhammad Attila Addarda",
-            "Fatkhuroji",
-            "Eki Panca Nugraha",
-            "Lionel Caesar Walakandou",
-            "Realdy Agsar Dwi Anggoro",
-            "Dika Maryanto",
-            "Suhardiansyah",
-            "Annisa Rahmi",
-            "Rika Jayang Sari",
-            "Moch Rizal Rizky",
-            "Asep Gunawan",
-            "Wilorik Hamonangan Panggabean",
-            "Bimo Anggoro Seno",
-            "Ditha Emeralda Indyka",
-            "Thoha Putra Kurnianda",
-            "Ariq Hafizh Bariqi",
-            "Febriyani",
-            "Mohamad Alfiandy",
-            "Jaya Abdullah",
-            "Mikhael Ronaldo Hutapea",
-            "Saidina Bima",
-            "Agung Kurniawan",
-            "Fahmi Nurrohman Sidiq",
-            "Ananda Bagas Amarullah Tanjung",
-            "Yavid Jaya Pradana",
-            "Claudia Svetlana Ranti",
-            "Adib Firdausi",
-            "Fikram Igo Sabtu",
-            "Asrul Akbar",
-            "Fahrur Rozi",
-            "Rasdhaty Oktaverlianda",
-            "Marolop Samuel Napitupulu",
-            "Dewi Mulka",
-            "Bella Amalhia Sanfano Putri",
-            "Lidya Devega",
-            "Muhammad Raihan Mubaroq",
-            "Yulia Sari",
-            "Sari Rasul Putri",
-            "Nechi Dwi Dianda",
-            "Rahmat Fadillah",
-            "Dicky Fredianto",
-            "Afika Rahayu",
-            "Khairun Nadya",
-            "Roni Risaldi",
-            "Muzammil Rabiawardana",
-            "Annisaa Oceania Syaifullah",
-            "Sabaril Nopri",
-            "Ali Fathullah Harun",
-            "Arief Firmansyah Putra",
-            "Theresia Yolanda Br. Sihaloho",
-            "Budi Bestara",
-            "Rina Armestiani",
-            "Wini Alfiani A",
+          "Mutia Zahro Utami",
+          "Riva Maulina",
+          "Adrio Welly Rolando",
+          "Agung Pratama",
+          "Dzaki Tristanto",
+          "Madrufi",
+          "Muhammad Attila Addarda",
+          "Fatkhuroji",
+          "Eki Panca Nugraha",
+          "Lionel Caesar Walakandou",
+          "Realdy Agsar Dwi Anggoro",
+          "Dika Maryanto",
+          "Suhardiansyah",
+          "Annisa Rahmi",
+          "Rika Jayang Sari",
+          "Moch Rizal Rizky",
+          "Asep Gunawan",
+          "Wilorik Hamonangan Panggabean",
+          "Bimo Anggoro Seno",
+          "Ditha Emeralda Indyka",
+          "Thoha Putra Kurnianda",
+          "Ariq Hafizh Bariqi",
+          "Febriyani",
+          "Mohamad Alfiandy",
+          "Jaya Abdullah",
+          "Mikhael Ronaldo Hutapea",
+          "Saidina Bima",
+          "Agung Kurniawan",
+          "Fahmi Nurrohman Sidiq",
+          "Ananda Bagas Amarullah Tanjung",
+          "Yavid Jaya Pradana",
+          "Claudia Svetlana Ranti",
+          "Adib Firdausi",
+          "Fikram Igo Sabtu",
+          "Asrul Akbar",
+          "Fahrur Rozi",
+          "Rasdhaty Oktaverlianda",
+          "Marolop Samuel Napitupulu",
+          "Dewi Mulka",
+          "Bella Amalhia Sanfano Putri",
+          "Lidya Devega",
+          "Muhammad Raihan Mubaroq",
+          "Yulia Sari",
+          "Sari Rasul Putri",
+          "Nechi Dwi Dianda",
+          "Rahmat Fadillah",
+          "Dicky Fredianto",
+          "Afika Rahayu",
+          "Khairun Nadya",
+          "Roni Risaldi",
+          "Muzammil Rabiawardana",
+          "Annisaa Oceania Syaifullah",
+          "Sabaril Nopri",
+          "Ali Fathullah Harun",
+          "Arief Firmansyah Putra",
+          "Theresia Yolanda Br. Sihaloho",
+          "Budi Bestara",
+          "Rina Armestiani",
+          "Wini Alfiani A",
         ];
 
         function showSuggestions(inputId, listId) {
@@ -96,11 +96,45 @@
             }
         }
 
+        async function isDataAlreadySubmitted(nama, date) {
+            try {
+                const response = await fetch("https://script.google.com/macros/s/AKfycbzGSb06xcAyG8Y6IswUJN41yYc6Plv-2coxJMdLITmDjamyOwVb5sDmq2FE9WlkodFuLQ/exec", {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                });
+
+                const result = await response.json();
+
+                if (result && Array.isArray(result.data)) {
+                    // Periksa apakah ada data yang sama dengan nama dan tanggal
+                    return result.data.some(entry => entry.nama === nama && entry.date === date);
+                } else {
+                    console.error("Gagal memuat data dari server.");
+                    return false;
+                }
+            } catch (error) {
+                console.error("Error memeriksa data:", error);
+                return false;
+            }
+        }
+
         window.handleSubmit = async (event) => {
             event.preventDefault();
 
             const form = document.getElementById("data-form");
             const formData = new FormData(form);
+            const nama = formData.get("nama");
+            const date = formData.get("date");
+
+            // Validasi apakah data sudah pernah disubmit untuk nama dan tanggal yang sama
+            const alreadySubmitted = await isDataAlreadySubmitted(nama, date);
+
+            if (alreadySubmitted) {
+                alert("Data sudah pernah disubmit pada hari ini.");
+                return; // Hentikan proses submit
+            }
 
             // Tambahkan timestamp saat ini
             const timestamp = new Date().toISOString();
@@ -113,7 +147,7 @@
             data.timestamp = timestamp; // Tambahkan properti timestamp
 
             try {
-                const response = await fetch("https://script.google.com/macros/s/AKfycbyS1z9NNgbo-TgZjxhBv62hDbz2wQtqDbFheDs07uZ5D3eom4eDYZazxx1-7LS0HkUYXA/exec", {
+                const response = await fetch("https://script.google.com/macros/s/AKfycbzGSb06xcAyG8Y6IswUJN41yYc6Plv-2coxJMdLITmDjamyOwVb5sDmq2FE9WlkodFuLQ/exec", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -142,6 +176,9 @@
             const section3 = document.getElementById('section-3');
             const aktivitas = document.getElementById('aktivitas');
             const remark = document.getElementById('remark');
+            const cutiRadio = document.getElementById('cuti');
+            const sakitRadio = document.getElementById('sakit');
+            const izinRadio = document.getElementById('izin');
 
             section2.classList.toggle('hidden', !hadir);
             section3.classList.toggle('hidden', hadir);
@@ -149,8 +186,14 @@
             if (hadir) {
                 aktivitas.setAttribute('required', 'true');
                 remark.removeAttribute('required');
+                cutiRadio.removeAttribute('required');
+                sakitRadio.removeAttribute('required');
+                izinRadio.removeAttribute('required');
             } else {
                 remark.setAttribute('required', 'true');
+                cutiRadio.setAttribute('required', 'true');
+                sakitRadio.setAttribute('required', 'true');
+                izinRadio.setAttribute('required', 'true');
                 aktivitas.removeAttribute('required');
             }
         };
@@ -187,50 +230,37 @@
                     placeholder="Masukkan nama"
                     oninput="showSuggestions('nama', 'nama-suggestions')"
                     required>
-                <div id="nama-suggestions" class="absolute bg-white border border-gray-300 rounded-md shadow-md mt-1"></div>
+                <div id="nama-suggestions" class="mt-1 bg-white shadow-lg rounded-md max-h-60 overflow-auto"></div>
             </div>
             <div>
-                <label for="date-input" class="block text-sm font-medium text-gray-700">Tanggal<span class="text-red-500">*</span></label>
-                <div class="flex space-x-4 mt-1">
-                    <input type="date" id="date-input" name="date" class="block w-full border border-gray-300 rounded-md shadow-sm p-2" required>
-                </div>
+                <label for="date" class="block text-sm font-medium text-gray-700">Tanggal</label>
+                <input
+                    type="date"
+                    id="date-input"
+                    name="date"
+                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                    required>
             </div>
             <div>
-                <label for="project" class="block text-sm font-medium text-gray-700">Project<span class="text-red-500">*</span></label>
-                <select id="project" name="project" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" required>
-                    <option value="">Pilih Project</option>
-                    <option>Collection KUM</option>
-                    <option>Collection Retail</option>
-                    <option>Collection SME</option>
-                    <option>Hygiene</option>
-                    <option>ORP Portal</option>
-                    <option>WFMS</option>
-                </select>
-            </div>
-            <div>
-                <label for="hadir" class="block text-sm font-medium text-gray-700">Kehadiran<span class="text-red-500">*</span></label>
-                <div class="mt-1 space-y-2">
-                    <div>
-                        <input type="radio" id="hadir" name="kehadiran" value="Hadir" class="mr-2" onclick="updateSection()" required>
-                        <label for="hadir">Hadir</label>
-                    </div>
-                    <div>
-                        <input type="radio" id="tidak-hadir" name="kehadiran" value="Tidak Hadir" class="mr-2" onclick="updateSection()" required>
-                        <label for="tidak-hadir">Tidak Hadir</label>
-                    </div>
-                </div>
+                <label class="block text-sm font-medium text-gray-700">Hadir</label>
+                <input type="checkbox" id="hadir" class="mr-2" onclick="updateSection()">
+                <label for="hadir">Ya, hadir</label>
             </div>
             <div id="section-2" class="hidden">
-                <label for="aktivitas" class="block text-sm font-medium text-gray-700">Aktivitas<span class="text-red-500">*</span></label>
-                <textarea id="aktivitas" name="aktivitas" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" placeholder="Deskripsikan aktivitas Anda" required></textarea>
+                <label for="aktivitas" class="block text-sm font-medium text-gray-700">Aktivitas</label>
+                <input type="text" id="aktivitas" name="aktivitas" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
             </div>
             <div id="section-3" class="hidden">
-                <label for="remark" class="block text-sm font-medium text-gray-700">Keterangan<span class="text-red-500">*</span></label>
-                <textarea id="remark" name="remark" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" placeholder="Keterangan tidak hadir" required></textarea>
+                <label class="block text-sm font-medium text-gray-700">Alasan (Jika Tidak Hadir)</label>
+                <input type="text" id="remark" name="remark" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2">
+                <div class="mt-2">
+                    <label class="block text-sm font-medium text-gray-700">Jenis Ketidakhadiran</label>
+                    <input type="radio" id="cuti" name="absence-type" value="Cuti"> <label for="cuti">Cuti</label>
+                    <input type="radio" id="sakit" name="absence-type" value="Sakit"> <label for="sakit">Sakit</label>
+                    <input type="radio" id="izin" name="absence-type" value="Izin"> <label for="izin">Izin</label>
+                </div>
             </div>
-            <div class="mt-4 flex justify-end">
-                <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md shadow hover:bg-blue-700">Submit</button>
-            </div>
+            <button type="submit" class="mt-4 w-full bg-blue-500 text-white py-2 px-4 rounded-md shadow-md hover:bg-blue-700">Submit</button>
         </form>
     </div>
 </body>
