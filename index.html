@@ -91,6 +91,10 @@
                 .catch(error => {
                   console.error('Error!', error.message)
                   alert("Gagal mengirim data. Silakan coba lagi.");
+
+                  // balikin btn
+                  btnKirim.classList.toggle("hidden")
+                  btnLoading.classList.toggle("hidden")
                 })
             })
 
