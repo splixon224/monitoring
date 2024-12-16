@@ -56,7 +56,7 @@
 
             const form = document.getElementById("data-form");
             // const formData = new FormData(form);
-            const scriptURL = 'https://script.google.com/macros/s/AKfycbwRzadfNCFW7Bc9xx0lNrqbCTPrF02FkL4I8k0cyInTuMCIIHiKKu4sVm3mtOy6oW1L/exec'
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbxxBZAgGpzobNDdwMe1Sgl6LV0Skhd4OKqOlXFHfB4veCkxTrBmw8FelvH4Yx7e08ImGw/exec'
 
             // const timestamp = new Date().toISOString();
             // const data = {};
@@ -72,8 +72,12 @@
 
               fetch(scriptURL, { method: 'POST', body: new FormData(form)})
                 .then(response => {
-                  alert("Data berhasil disimpan ke Google Spreadsheet!");
-
+                  if (!response.ok) {
+                      throw new Error('Network response was not ok ' + response.statusText);
+                  }
+                  return response.json();
+                })
+                .then(data => {
                   // reset from
                   form.reset();
                   //balikin  tanggal default ke today
@@ -82,9 +86,11 @@
                   // balikin btn
                   btnKirim.classList.toggle("hidden")
                   btnLoading.classList.toggle("hidden")
+
+                  alert(data.result + " : " + data.message)
                 })
                 .catch(error => {
-                  console.log('Error!', error.message)
+                  console.log(error.result, error.message)
                   alert("Gagal mengirim data. Silakan coba lagi.");
 
                   // balikin btn
