@@ -7,7 +7,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="output.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="icon" type="image/x-icon" href="favicon.ico"/>
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <script>
@@ -102,6 +101,7 @@
             const remarkSection = document.getElementById('remark-section');
             const aktivitas = document.getElementById('aktivitas');
             const remark = document.getElementById('remark');
+            const AlasanCuti = document.getElementById('cuti');
 
             section2.classList.add('hidden');
             section3.classList.add('hidden');
@@ -110,6 +110,7 @@
             if (hadirRadio.checked) {
                 section2.classList.remove('hidden');
                 aktivitas.setAttribute('required', 'true');
+                AlasanCuti.removeAttribute('required');
                 remark.removeAttribute('required');
             } else if (tidakHadirRadio.checked) {
                 section3.classList.remove('hidden');
