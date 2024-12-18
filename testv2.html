@@ -21,7 +21,7 @@
                 "Omnis responsibilitas in manibus meis."
             </blockquote>
         </div>
-        <form id="data-form" class="p-4 space-y-6" onsubmit="handleSubmit(event)">
+        <form id="" class="p-4 space-y-6" onsubmit="">
 
           <nav class="bg-blue-300 shadow-md">
               <div class="container mx-auto flex justify-center items-center p-4">
@@ -36,14 +36,14 @@
                 <label for="nama" class="block text-sm font-medium text-gray-700">Nama Lengkap<span class="text-red-500">*</span></label>
                 <input
                     type="text"
-                    id="nama"
+                    id="namaIn"
                     name="Nama Lengkap"
                     class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm"
                     autocomplete="off"
-                    oninput="showSuggestions('nama', 'suggestions-list')"
+                    oninput="showSuggestions('namaIn', 'suggestions-list-In')"
                     required
                 />
-                <div id="suggestions-list" class="absolute mt-1 w-full bg-white border border-gray-300 rounded-md shadow-sm hidden"></div>
+                <div id="suggestions-list-In" class="absolute mt-1 w-full bg-white border border-gray-300 rounded-md shadow-sm hidden"></div>
             </div>
 
             <div class="my-3">
@@ -74,7 +74,7 @@
 
             <div class="my-3">
                 <label for="camera-input" class="block text-sm font-medium text-gray-700">Swafoto<span class="text-red-500">*</span></label>
-                <input type="file" accept="image/*" capture="user" id="camera-input" placeholder="Ambil gambar dari kamera" onchange="previewImage()">
+                <input type="file" accept="image/*" capture="user" id="camera-input" placeholder="Ambil gambar dari kamera" onchange="previewImage()" required>
                 <h6 class="text-xs font-thin text-red-500 mt-1">*Swafoto wajib diambil di lokasi kantor</h6>
             </div>
 
@@ -98,21 +98,23 @@
 
           </div>
           <!-- end section in -->
+        </form>
 
+        <form id="data-form" class="p-4 space-y-6" onsubmit="handleSubmit(event)">
           <!-- section out -->
           <div id="checkOutSection" class="hidden">
             <div class="relative my-3">
                 <label for="nama" class="block text-sm font-medium text-gray-700">Nama Lengkap<span class="text-red-500">*</span></label>
                 <input
                     type="text"
-                    id="nama"
+                    id="namaOut"
                     name="Nama Lengkap"
                     class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm"
                     autocomplete="off"
-                    oninput="showSuggestions('nama', 'suggestions-list')"
+                    oninput="showSuggestions('namaOut', 'suggestions-list-Out')"
                     required
                 />
-                <div id="suggestions-list" class="absolute mt-1 w-full bg-white border border-gray-300 rounded-md shadow-sm hidden"></div>
+                <div id="suggestions-list-Out" class="absolute mt-1 w-full bg-white border border-gray-300 rounded-md shadow-sm hidden"></div>
             </div>
 
             <div class="my-3">
