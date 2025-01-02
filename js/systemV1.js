@@ -41,78 +41,44 @@ function showSuggestions(inputId, listId) {
 window.handleSubmit = async (event) => {
     event.preventDefault();
 
-    const formElement = event.target;
-    const formId = formElement.id;
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbx1fgoFBeIwtQXv_obK4UpBIJxAjitmqgywYMhOawqYeOFNTc5u8DS-Vce4TR-mCD-2lQ/exec'
+    const form = document.getElementById("data-form");
+    // const formData = new FormData(form);
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbyflm-VBdz1fZG9NqxtoQ6TJfcnk0X5Z86c2hOefHlj8PHDjykoKFs5EVQlnjQlZznW/exec'
 
-    const btnKirimCI = document.getElementById('btnKirimCI')
-    const btnLoadingCI = document.getElementById('btnLoadingCI')
-    const btnKirimCO = document.getElementById('btnKirimCO')
-    const btnLoadingCO = document.getElementById('btnLoadingCO')
-    const formData = new FormData(formElement);
+      const btnKirim = document.getElementById('btnKirim')
+      const btnLoading = document.getElementById('btnLoading')
+      btnKirim.classList.toggle("hidden")
+      btnLoading.classList.toggle("hidden")
 
-    if (formId === 'form-CheckIn') {
-      btnKirimCI.classList.toggle("hidden")
-      btnLoadingCI.classList.toggle("hidden")
-
-      fetch(scriptURL, { method: 'POST', body: formData })
+      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
         .then(response => {
           if (!response.ok) {
-              throw new Error('Server sedang mengalami kendala : ' + response.statusText);
+              throw new Error('Network response was not ok ' + response.statusText);
           }
           return response.json();
         })
         .then(data => {
           // reset from
-          formElement.reset();
-          // balikin btn
-          btnKirimCI.classList.toggle("hidden")
-          btnLoadingCI.classList.toggle("hidden")
-
-          alert(data.result + " : " + data.message);
-        })
-        .catch(error => {
-          console.log(error)
-          alert("Gagal mengirim data Check In. Silakan coba lagi.");
-
-          // balikin btn
-          btnKirimCI.classList.toggle("hidden")
-          btnLoadingCI.classList.toggle("hidden")
-        })
-    } else if (formId === 'form-CheckOut') {
-      btnKirimCO.classList.toggle("hidden")
-      btnLoadingCO.classList.toggle("hidden")
-
-      fetch(scriptURL, { method: 'POST', body: formData})
-        .then(response => {
-          if (!response.ok) {
-              throw new Error('Server sedang mengalami kendala : ' + response.statusText);
-          }
-          return response.json();
-        })
-        .then(data => {
-          // reset from
-          formElement.reset();
+          form.reset();
           // balikin section
           updateSection();
           //balikin  tanggal default ke today
           const dateInput = document.getElementById('date-input');
           dateInput.valueAsDate = new Date();
           // balikin btn
-          btnKirimCO.classList.toggle("hidden")
-          btnLoadingCO.classList.toggle("hidden")
+          btnKirim.classList.toggle("hidden")
+          btnLoading.classList.toggle("hidden")
 
-          alert(data.result + " : " + data.message + " : " + data.total)
+          alert(data.result + " : " + data.message)
         })
         .catch(error => {
           console.log(error.result, error.message)
-          alert("Gagal mengirim data CheckOut. Silakan coba lagi.");
+          alert("Gagal mengirim data. Silakan coba lagi.");
 
           // balikin btn
-          btnKirimCO.classList.toggle("hidden")
-          btnLoadingCO.classList.toggle("hidden")
+          btnKirim.classList.toggle("hidden")
+          btnLoading.classList.toggle("hidden")
         })
-    }
 };
 
 window.updateSection = function () {
@@ -175,21 +141,18 @@ window.checkSection = function (event) {
   const checkOut = document.getElementById('checkOut');
   const checkInSection = document.getElementById('checkInSection');
   const checkOutSection = document.getElementById('checkOutSection');
-  // const RekamWaktuIn = document.getElementById('RekamWaktuIn');
-  // const RekamWaktuOut = document.getElementById('RekamWaktuOut');
-  const fromCheckIn = document.getElementById('form-CheckIn');
+  const RekamWaktuIn = document.getElementById('RekamWaktuIn');
+  const RekamWaktuOut = document.getElementById('RekamWaktuOut');
 
   if(elementId == "checkIn"){
     checkInSection.classList.remove('hidden');
     checkOutSection.classList.add('hidden');
-    fromCheckIn.classList.remove('hidden');
-    // RekamWaktuIn.value = 'Check In';
+    RekamWaktuIn.value = 'Check In';
   }
   else if (elementId == "checkOut") {
     checkOutSection.classList.remove('hidden');
     checkInSection.classList.add('hidden');
-    fromCheckIn.classList.add('hidden');
-    // RekamWaktuOut.value = 'Check Out';
+    RekamWaktuOut.value = 'Check Out';
   }
 }
 
