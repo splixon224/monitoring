@@ -43,7 +43,7 @@ window.handleSubmit = async (event) => {
 
     const formElement = event.target;
     const formId = formElement.id;
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbx1fgoFBeIwtQXv_obK4UpBIJxAjitmqgywYMhOawqYeOFNTc5u8DS-Vce4TR-mCD-2lQ/exec'
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxpQRTPQZXi5PJ7jd0jbT8__SqkTrviaBB4N757LWRtTUYAM3LbQarZkFaWSzv_x6h60Q/exec'
 
     const btnKirimCI = document.getElementById('btnKirimCI')
     const btnLoadingCI = document.getElementById('btnLoadingCI')
@@ -60,6 +60,7 @@ window.handleSubmit = async (event) => {
           if (!response.ok) {
               throw new Error('Server sedang mengalami kendala : ' + response.statusText);
           }
+          setDateTime();
           return response.json();
         })
         .then(data => {
@@ -70,6 +71,7 @@ window.handleSubmit = async (event) => {
           btnLoadingCI.classList.toggle("hidden")
 
           alert(data.result + " : " + data.message);
+          setDateTime();
         })
         .catch(error => {
           console.log(error)
@@ -78,6 +80,7 @@ window.handleSubmit = async (event) => {
           // balikin btn
           btnKirimCI.classList.toggle("hidden")
           btnLoadingCI.classList.toggle("hidden")
+          setDateTime();
         })
     } else if (formId === 'form-CheckOut') {
       btnKirimCO.classList.toggle("hidden")
@@ -153,7 +156,7 @@ window.updateRemarkSection = function () {
     }
 };
 
-window.onload = function () {
+window.onload = function setDateTime () {
     const dateInput = document.getElementById('date-input');
     const today = new Date();
     const yyyy = today.getFullYear();
