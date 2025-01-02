@@ -156,7 +156,7 @@ window.updateRemarkSection = function () {
     }
 };
 
-window.onload = function setDateTime () {
+function setDateTime () {
     const dateInput = document.getElementById('date-input');
     const today = new Date();
     const yyyy = today.getFullYear();
@@ -170,6 +170,10 @@ window.onload = function setDateTime () {
     const hours = String(today.getHours()).padStart(2, '0');
     const minutes = String(today.getMinutes()).padStart(2, '0');
     dateInputIN.value = `${yyyy}-${mm}-${dd}T${hours}:${minutes}`;
+}
+
+window.onload = function () {
+    setDateTime();
 };
 
 window.checkSection = function (event) {
