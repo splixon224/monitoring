@@ -43,7 +43,7 @@ window.handleSubmit = async (event) => {
 
     const formElement = event.target;
     const formId = formElement.id;
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbxS0cVU3hrWxgG9TJNwkm1duvie2qqmgNWBDdSZKPbReI3FJKcUBY5A6hbIi30HfXmc/exec'
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbz1DsrxG_2D5oCpO7QTeNj8wU4Hr3Vssa_eURe6jGrEz9Ue2FwnprBWqWqnFh9vO-DD5w/exec'
 
     const btnKirimCI = document.getElementById('btnKirimCI')
     const btnLoadingCI = document.getElementById('btnLoadingCI')
@@ -55,7 +55,7 @@ window.handleSubmit = async (event) => {
       btnKirimCI.classList.toggle("hidden")
       btnLoadingCI.classList.toggle("hidden")
 
-      fetch(scriptURL, { method: 'POST', body: formData })
+      fetch(scriptURL, { method: 'POST', body: formData})
         .then(response => {
           if (!response.ok) {
               throw new Error('Server sedang mengalami kendala : ' + response.statusText);
