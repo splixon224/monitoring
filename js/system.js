@@ -43,7 +43,7 @@ window.handleSubmit = async (event) => {
 
     const formElement = event.target;
     const formId = formElement.id;
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbztX9OhNLxUc5fLWzv9GWUY9lQ25OG1kh85xYTBt2IqCgz3AXwRLVnxLwNPMxBdMBvD/exec'
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbyumVsHR9q1YBOtl7UK3y3txu7ANOiBIfH0gh2vSUBPOPPE6ugSbFtqK93Z7Ker_zfHHQ/exec'
 
     const btnKirimCI = document.getElementById('btnKirimCI')
     const btnLoadingCI = document.getElementById('btnLoadingCI')
@@ -51,42 +51,53 @@ window.handleSubmit = async (event) => {
     const btnLoadingCO = document.getElementById('btnLoadingCO')
     const formData = new FormData(formElement);
 
+    console.log("Form yang diproses : " + formId)
+
     if (formId === 'form-CheckIn') {
       btnKirimCI.classList.toggle("hidden")
       btnLoadingCI.classList.toggle("hidden")
 
-      fetch(scriptURL, { method: 'POST', body: formData})
-        .then(response => {
-          if (!response.ok) {
-              throw new Error('Server sedang mengalami kendala : ' + response.statusText);
-          }
-          setDateTime();
-          return response.json();
-        })
-        .then(data => {
-          // reset from
-          formElement.reset();
-          // balikin btn
-          btnKirimCI.classList.toggle("hidden")
-          btnLoadingCI.classList.toggle("hidden")
+      alert("Mohon Maaf Fitur Check In sedang dalam Pengembangan !!!");
+      formElement.reset();
+      document.getElementById('previewImage').classList.add('hidden');
+      setDateTime();
 
-          alert(data.result + " : " + data.message);
-          setDateTime();
-        })
-        .catch(error => {
-          console.log(error)
-          alert("Gagal mengirim data Check In. Silakan coba lagi.");
+      // balikin btn
+      btnKirimCI.classList.toggle("hidden")
+      btnLoadingCI.classList.toggle("hidden")
 
-          // balikin btn
-          btnKirimCI.classList.toggle("hidden")
-          btnLoadingCI.classList.toggle("hidden")
-          setDateTime();
-        })
+      // fetch(scriptURL, { method: 'POST', body: formData})
+      //   .then(response => {
+      //     if (!response.ok) {
+      //         throw new Error('Server sedang mengalami kendala : ' + response.statusText);
+      //     }
+      //     setDateTime();
+      //     return response.json();
+      //   })
+      //   .then(data => {
+      //     // reset from
+      //     formElement.reset();
+      //     // balikin btn
+      //     btnKirimCI.classList.toggle("hidden")
+      //     btnLoadingCI.classList.toggle("hidden")
+      //
+      //     alert(data.result + " : " + data.message);
+      //     setDateTime();
+      //   })
+      //   .catch(error => {
+      //     console.log(error)
+      //     alert("Gagal mengirim data Check In. Silakan coba lagi.");
+      //
+      //     // balikin btn
+      //     btnKirimCI.classList.toggle("hidden")
+      //     btnLoadingCI.classList.toggle("hidden")
+      //     setDateTime();
+        // })
     } else if (formId === 'form-CheckOut') {
       btnKirimCO.classList.toggle("hidden")
       btnLoadingCO.classList.toggle("hidden")
 
-      fetch(scriptURL, { method: 'POST', body: formData, mode: 'no-cors'})
+      fetch(scriptURL, { method: 'POST', body: formData})
         .then(response => {
           if (!response.ok) {
               throw new Error('Server sedang mengalami kendala : ' + response.statusText);
@@ -105,11 +116,11 @@ window.handleSubmit = async (event) => {
           btnKirimCO.classList.toggle("hidden")
           btnLoadingCO.classList.toggle("hidden")
 
-          alert(data.result + " : " + data.message + " : " + data.total)
+          alert(data.result + " : " + data.message)
         })
         .catch(error => {
           console.log(error.result, error.message)
-          alert("Gagal mengirim data CheckOut. Silakan coba lagi.");
+          alert("Gagal mengirim data Check Out. Silakan coba lagi.");
 
           // balikin btn
           btnKirimCO.classList.toggle("hidden")
