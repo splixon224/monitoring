@@ -43,7 +43,7 @@ window.handleSubmit = async (event) => {
 
     const formElement = event.target;
     const formId = formElement.id;
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbyumVsHR9q1YBOtl7UK3y3txu7ANOiBIfH0gh2vSUBPOPPE6ugSbFtqK93Z7Ker_zfHHQ/exec'
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbx8A6d9JCFR8A7zvjbl3tWhDbAF5z9viYETTDwwNHSfRWEqRJCQOAIXffgChVi1Zv-qJw/exec'
 
     const btnKirimCI = document.getElementById('btnKirimCI')
     const btnLoadingCI = document.getElementById('btnLoadingCI')
@@ -57,42 +57,45 @@ window.handleSubmit = async (event) => {
       btnKirimCI.classList.toggle("hidden")
       btnLoadingCI.classList.toggle("hidden")
 
-      alert("Mohon Maaf Fitur Check In sedang dalam Pengembangan !!!");
-      formElement.reset();
-      document.getElementById('previewImage').classList.add('hidden');
-      setDateTime();
-
-      // balikin btn
-      btnKirimCI.classList.toggle("hidden")
-      btnLoadingCI.classList.toggle("hidden")
-
-      // fetch(scriptURL, { method: 'POST', body: formData})
-      //   .then(response => {
-      //     if (!response.ok) {
-      //         throw new Error('Server sedang mengalami kendala : ' + response.statusText);
-      //     }
-      //     setDateTime();
-      //     return response.json();
-      //   })
-      //   .then(data => {
-      //     // reset from
-      //     formElement.reset();
-      //     // balikin btn
-      //     btnKirimCI.classList.toggle("hidden")
-      //     btnLoadingCI.classList.toggle("hidden")
+      // alert("Mohon Maaf Fitur Check In sedang dalam Pengembangan !!!");
+      // formElement.reset();
+      // document.getElementById('previewImage').classList.add('hidden');
+      // setDateTime();
       //
-      //     alert(data.result + " : " + data.message);
-      //     setDateTime();
-      //   })
-      //   .catch(error => {
-      //     console.log(error)
-      //     alert("Gagal mengirim data Check In. Silakan coba lagi.");
-      //
-      //     // balikin btn
-      //     btnKirimCI.classList.toggle("hidden")
-      //     btnLoadingCI.classList.toggle("hidden")
-      //     setDateTime();
-        // })
+      // // balikin btn
+      // btnKirimCI.classList.toggle("hidden")
+      // btnLoadingCI.classList.toggle("hidden")
+
+      const fileInput = document.getElementById('camera-input');
+      formData.append('selfie', fileInput.files[0]);
+
+      fetch(scriptURL, { method: 'POST', body: formData, mode: 'no-cors'})
+        .then(response => {
+          if (!response.ok) {
+              throw new Error('Server sedang mengalami kendala : ' + response.statusText);
+          }
+          setDateTime();
+          return response.json();
+        })
+        .then(data => {
+          // reset from
+          formElement.reset();
+          // balikin btn
+          btnKirimCI.classList.toggle("hidden")
+          btnLoadingCI.classList.toggle("hidden")
+
+          alert(data.result + " : " + data.message);
+          setDateTime();
+        })
+        .catch(error => {
+          console.log(error)
+          alert("Gagal mengirim data Check In. Silakan coba lagi.");
+
+          // balikin btn
+          btnKirimCI.classList.toggle("hidden")
+          btnLoadingCI.classList.toggle("hidden")
+          setDateTime();
+        })
     } else if (formId === 'form-CheckOut') {
       btnKirimCO.classList.toggle("hidden")
       btnLoadingCO.classList.toggle("hidden")
