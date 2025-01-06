@@ -43,7 +43,7 @@ window.handleSubmit = async (event) => {
 
     const formElement = event.target;
     const formId = formElement.id;
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbyuwTUWGCBUacGsRwXxcttptqSIuRQzMh4Xdur7IypT-Kp9HHBghmcceJ6IX2rM3jKw5A/exec'
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbx5yWKB1i0ceWSAPTfdnUc_LPpmxc3DaA0laNhRwWljQZM5r4xZFcrHkW7v4cFRjKO1/exec'
 
     const btnKirimCI = document.getElementById('btnKirimCI')
     const btnLoadingCI = document.getElementById('btnLoadingCI')
@@ -71,7 +71,7 @@ window.handleSubmit = async (event) => {
 
           formData.append('base64', spt)
           formData.append('type', file.type)
-          formData.append('name', file.name)
+          // formData.append('name', file.name)
 
           fetch(scriptURL, { method: 'POST', body: formData})
             .then(response => {
