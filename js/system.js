@@ -43,7 +43,7 @@ window.handleSubmit = async (event) => {
 
     const formElement = event.target;
     const formId = formElement.id;
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbxp-qKwuJGAH9xoHjS_MakJsyWZHzLzmRcVaam79YtynyUHVGurRKxp_Z933OPvUYGxwA/exec'
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbyuwTUWGCBUacGsRwXxcttptqSIuRQzMh4Xdur7IypT-Kp9HHBghmcceJ6IX2rM3jKw5A/exec'
 
     const btnKirimCI = document.getElementById('btnKirimCI')
     const btnLoadingCI = document.getElementById('btnLoadingCI')
@@ -57,42 +57,58 @@ window.handleSubmit = async (event) => {
       btnKirimCI.classList.toggle("hidden")
       btnLoadingCI.classList.toggle("hidden")
 
-      alert("Mohon Maaf Fitur Check In Sedang Dalam Pengembangan !!!");
-      formElement.reset();
-      document.getElementById('previewImage').classList.add('hidden');
-      setDateTime();
+      // alert("Mohon Maaf Fitur Check In Sedang Dalam Pengembangan !!!");
+      // formElement.reset();
+      // document.getElementById('previewImage').classList.add('hidden');
+      // setDateTime();
 
-      // balikin btn
-      btnKirimCI.classList.toggle("hidden")
-      btnLoadingCI.classList.toggle("hidden")
+      const file = document.getElementById("Swafoto").files[0];
+      if(file){
+        const fr = new FileReader();
+        fr.onload = function() {
+          const res = fr.result;
+          const spt = res.split("base64,")[1];
 
-      // fetch(scriptURL, { method: 'POST', body: formData})
-      //   .then(response => {
-      //     if (!response.ok) {
-      //         throw new Error('Server sedang mengalami kendala : ' + response.statusText);
-      //     }
-      //     setDateTime();
-      //     return response.json();
-      //   })
-      //   .then(data => {
-      //     // reset from
-      //     formElement.reset();
-      //     // balikin btn
-      //     btnKirimCI.classList.toggle("hidden")
-      //     btnLoadingCI.classList.toggle("hidden")
-      //
-      //     alert(data.result + " : " + data.message);
-      //     setDateTime();
-      //   })
-      //   .catch(error => {
-      //     console.log(error)
-      //     alert("Gagal mengirim data Check In. Silakan coba lagi.");
-      //
-      //     // balikin btn
-      //     btnKirimCI.classList.toggle("hidden")
-      //     btnLoadingCI.classList.toggle("hidden")
-      //     setDateTime();
-      //   })
+          formData.append('base64', spt)
+          formData.append('type', file.type)
+          formData.append('name', file.name)
+
+          fetch(scriptURL, { method: 'POST', body: formData})
+            .then(response => {
+              if (!response.ok) {
+                  throw new Error('Server sedang mengalami kendala : ' + response.statusText);
+              }
+              document.getElementById('previewImage').classList.add('hidden');
+              setDateTime();
+              return response.json();
+            })
+            .then(data => {
+              // reset from
+              formElement.reset();
+              // balikin btn
+              btnKirimCI.classList.toggle("hidden")
+              btnLoadingCI.classList.toggle("hidden")
+
+              alert(data.result + " : " + data.message);
+              document.getElementById('previewImage').classList.add('hidden');
+              setDateTime();
+            })
+            .catch(error => {
+              console.log(error)
+              alert("Gagal mengirim data Check In. Silakan coba lagi.");
+
+              // balikin btn
+              btnKirimCI.classList.toggle("hidden")
+              btnLoadingCI.classList.toggle("hidden")
+              document.getElementById('previewImage').classList.add('hidden');
+              setDateTime();
+            })
+        }
+        fr.readAsDataURL(file);
+      } else{
+          throw new Error('Swafoto Tidak Terbaca !!!');
+      }
+
     } else if (formId === 'form-CheckOut') {
       btnKirimCO.classList.toggle("hidden")
       btnLoadingCO.classList.toggle("hidden")
