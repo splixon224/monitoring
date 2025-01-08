@@ -41,6 +41,7 @@
                     class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm"
                     autocomplete="off"
                     oninput="showSuggestions('namaIn', 'suggestions-list-In')"
+                    onkeypress="validateInput(event)"
                     required
                 />
                 <div id="suggestions-list-In" class="absolute mt-1 w-full bg-white border border-gray-300 rounded-md shadow-sm hidden"></div>
@@ -127,6 +128,7 @@
                     class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm"
                     autocomplete="off"
                     oninput="showSuggestions('namaOut', 'suggestions-list-Out')"
+                    onkeypress="validateInput(event)"
                     required
                 />
                 <div id="suggestions-list-Out" class="absolute mt-1 w-full bg-white border border-gray-300 rounded-md shadow-sm hidden"></div>

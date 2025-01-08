@@ -263,3 +263,12 @@ window.previewImage = function() {
       preview.style.display = 'none'; // Sembunyikan gambar pratinjau
   }
 }
+
+function validateInput(event) {
+    const char = String.fromCharCode(event.which);
+    const regex = /^[A-Za-z\s]+$/;; // Hanya huruf
+
+    if (!regex.test(char)) {
+        event.preventDefault(); // Mencegah input jika bukan huruf
+    }
+}
