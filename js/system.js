@@ -43,7 +43,7 @@ window.handleSubmit = async (event) => {
 
     const formElement = event.target;
     const formId = formElement.id;
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbx5yWKB1i0ceWSAPTfdnUc_LPpmxc3DaA0laNhRwWljQZM5r4xZFcrHkW7v4cFRjKO1/exec'
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbwt5ski6EUbG82kNVwqrjrF7nQ3TTqZHy2snL76yURviMOR0pNQJCuQeDAIPb78inKrIQ/exec'
 
     const btnKirimCI = document.getElementById('btnKirimCI')
     const btnLoadingCI = document.getElementById('btnLoadingCI')
