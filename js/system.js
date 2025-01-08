@@ -78,18 +78,20 @@ window.handleSubmit = async (event) => {
               if (!response.ok) {
                   throw new Error('Server sedang mengalami kendala : ' + response.statusText);
               }
+              btnKirimCI.classList.toggle("hidden")
+              btnLoadingCI.classList.toggle("hidden")
               document.getElementById('previewImage').classList.add('hidden');
               setDateTime();
               return response.json();
             })
             .then(data => {
-              // reset from
               formElement.reset();
-              // balikin btn
               btnKirimCI.classList.toggle("hidden")
               btnLoadingCI.classList.toggle("hidden")
 
               alert(data.result + " : " + data.message);
+              btnKirimCI.classList.toggle("hidden")
+              btnLoadingCI.classList.toggle("hidden")
               document.getElementById('previewImage').classList.add('hidden');
               setDateTime();
             })
@@ -106,7 +108,11 @@ window.handleSubmit = async (event) => {
         }
         fr.readAsDataURL(file);
       } else{
-          throw new Error('Swafoto Tidak Terbaca !!!');
+        alert('Anda Belum Mengunggah Swafoto !!!')
+        btnKirimCI.classList.toggle("hidden")
+        btnLoadingCI.classList.toggle("hidden")
+        setDateTime();
+        return;
       }
 
     } else if (formId === 'form-CheckOut') {
@@ -190,8 +196,16 @@ function setDateTime () {
     const mm = String(today.getMonth() + 1).padStart(2, '0');
     const dd = String(today.getDate()).padStart(2, '0');
 
+    //min
+    const todayMin = new Date()
+    todayMin.setDate(todayMin.getDate() - 7);
+    const mdd = String(todayMin.getDate()).padStart(2, '0');
+    const mmm = String(todayMin.getMonth() + 1).padStart(2, '0');
+    const myyyy = todayMin.getFullYear();
+
     dateInput.value = `${yyyy}-${mm}-${dd}`;
     dateInput.max = `${yyyy}-${mm}-${dd}`;
+    dateInput.min = `${myyyy}-${mmm}-${mdd}`;
 
     const dateInputIN = document.getElementById('date-input-IN');
     const hours = String(today.getHours()).padStart(2, '0');
