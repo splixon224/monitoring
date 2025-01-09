@@ -1,17 +1,17 @@
 const suggestions = [
     "Mutia Zahro Utami", "Riva Maulina", "Adrio Welly Rolando", "Agung Pratama", "Dzaki Tristanto",
-    "Madrufi", "Muhammad Attila Addarda", "Fatkhuroji", "Eki Panca Nugraha", "Lionel Caesar Walakandou",
+    "Madrufi","Fatkhuroji", "Eki Panca Nugraha", "Lionel Caesar Walakandou",
     "Realdy Agsar Dwi Anggoro", "Dika Maryanto", "Suhardiansyah", "Annisa Rahmi", "Rika Jayang Sari",
     "Moch Rizal Rizky", "Asep Gunawan", "Wilorik Hamonangan Panggabean", "Bimo Anggoro Seno",
-    "Ditha Emeralda Indyka", "Thoha Putra Kurnianda", "Ariq Hafizh Bariqi", "Febriyani", "Mohamad Alfiandy",
+    "Ditha Emeralda Indyka", "Thoha Putra Kurnianda", "Ariq Hafizh Bariqi", "Mohamad Alfiandy",
     "Jaya Abdullah", "Mikhael Ronaldo Hutapea", "Saidina Bima", "Agung Kurniawan", "Fahmi Nurrohman Sidiq",
     "Ananda Bagas Amarullah Tanjung", "Yavid Jaya Pradana", "Claudia Svetlana Ranti", "Adib Firdausi",
-    "Fikram Igo Sabtu", "Asrul Akbar", "Fahrur Rozi", "Rasdhaty Oktaverlianda", "Marolop Samuel Napitupulu",
-    "Dewi Mulka", "Bella Amalhia Sanfano Putri", "Lidya Devega", "Muhammad Raihan Mubaroq", "Yulia Sari",
+    "Fikram Igo Sabtu", "Asrul Akbar", "Fahrur Rozi", "Marolop Samuel Napitupulu",
+    "Bella Amalhia Sanfano Putri", "Lidya Devega", "Muhammad Raihan Mubaroq", "Yulia Sari",
     "Sari Rasul Putri", "Nechi Dwi Dianda", "Rahmat Fadillah", "Dicky Fredianto", "Afika Rahayu",
     "Khairun Nadya", "Roni Risaldi", "Muzammil Rabiawardana", "Annisaa Oceania Syaifullah", "Sabaril Nopri",
     "Ali Fathullah Harun", "Arief Firmansyah Putra", "Theresia Yolanda Br. Sihaloho", "Budi Bestara",
-    "Rina Armestiani", "Wini Alfiani A"
+    "Rina Armestiani", "Wini Alfiani A", "Test"
 ];
 
 function showSuggestions(inputId, listId) {
@@ -43,7 +43,7 @@ window.handleSubmit = async (event) => {
 
     const formElement = event.target;
     const formId = formElement.id;
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbwt5ski6EUbG82kNVwqrjrF7nQ3TTqZHy2snL76yURviMOR0pNQJCuQeDAIPb78inKrIQ/exec'
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbyBwUFJiqUil-xhyYAZ3ehc_apai8Ok57fMBPYUhLVkGFHbXDQrPipGHZ6OKY0-fAuv1A/exec'
 
     const btnKirimCI = document.getElementById('btnKirimCI')
     const btnLoadingCI = document.getElementById('btnLoadingCI')
@@ -119,35 +119,45 @@ window.handleSubmit = async (event) => {
       btnKirimCO.classList.toggle("hidden")
       btnLoadingCO.classList.toggle("hidden")
 
-      fetch(scriptURL, { method: 'POST', body: formData})
-        .then(response => {
-          if (!response.ok) {
-              throw new Error('Server sedang mengalami kendala : ' + response.statusText);
-          }
-          return response.json();
-        })
-        .then(data => {
-          // reset from
-          formElement.reset();
-          // balikin section
-          updateSection();
-          //balikin  tanggal default ke today
-          const dateInput = document.getElementById('date-input');
-          dateInput.valueAsDate = new Date();
-          // balikin btn
-          btnKirimCO.classList.toggle("hidden")
-          btnLoadingCO.classList.toggle("hidden")
+      // const inputAktivitas = document.getElementById('aktivitas').value;
+      // const inputKeterangan = document.getElementById('remark').value;
+      //
+      // if (validateInputActivity(inputAktivitas) || validateInputActivity(inputKeterangan)) {
+      //   alert("AKTIVITAS atau KETERANGAN hanya berisi Spasi atau Tab, Mohon untuk isi dengan benar !!!")
+      //   event.preventDefault(); // Hentikan proses pengiriman form
+      //   btnKirimCO.classList.toggle("hidden")
+      //   btnLoadingCO.classList.toggle("hidden")
+      // } else {
+        fetch(scriptURL, { method: 'POST', body: formData})
+          .then(response => {
+            if (!response.ok) {
+                throw new Error('Server sedang mengalami kendala : ' + response.statusText);
+            }
+            return response.json();
+          })
+          .then(data => {
+            // reset from
+            formElement.reset();
+            // balikin section
+            updateSection();
+            //balikin  tanggal default ke today
+            const dateInput = document.getElementById('date-input');
+            dateInput.valueAsDate = new Date();
+            // balikin btn
+            btnKirimCO.classList.toggle("hidden")
+            btnLoadingCO.classList.toggle("hidden")
 
-          alert(data.result + " : " + data.message)
-        })
-        .catch(error => {
-          console.log(error.result, error.message)
-          alert("Gagal mengirim data Check Out. Silakan coba lagi.");
+            alert(data.result + " : " + data.message)
+          })
+          .catch(error => {
+            console.log(error.result, error.message)
+            alert("Gagal mengirim data Check Out. Silakan coba lagi.");
 
-          // balikin btn
-          btnKirimCO.classList.toggle("hidden")
-          btnLoadingCO.classList.toggle("hidden")
-        })
+            // balikin btn
+            btnKirimCO.classList.toggle("hidden")
+            btnLoadingCO.classList.toggle("hidden")
+          })
+      // }
     }
 };
 
@@ -264,11 +274,17 @@ window.previewImage = function() {
   }
 }
 
-function validateInput(event) {
+function validateInputName(event) {
     const char = String.fromCharCode(event.which);
     const regex = /^[A-Za-z\s]+$/;; // Hanya huruf
 
     if (!regex.test(char)) {
         event.preventDefault(); // Mencegah input jika bukan huruf
     }
+}
+
+function validateInputActivity(input) {
+    // Ekspresi reguler untuk memeriksa apakah input hanya terdiri dari spasi atau tab
+    const regex = /^[ \t]*$/;
+    return regex.test(input);
 }
