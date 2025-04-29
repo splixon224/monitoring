@@ -11,7 +11,14 @@ const suggestions = [
     "Sari Rasul Putri", "Nechi Dwi Dianda", "Rahmat Fadillah", "Dicky Fredianto", "Afika Rahayu",
     "Khairun Nadya", "Roni Risaldi", "Muzammil Rabiawardana", "Annisaa Oceania Syaifullah", "Sabaril Nopri",
     "Ali Fathullah Harun", "Arief Firmansyah Putra", "Theresia Yolanda Br. Sihaloho", "Budi Bestara",
-    "Rina Armestiani", "Wini Alfiani A", "Test"
+    "Rina Armestiani", "Wini Alfiani A", "Muhammad Abdu","Irfan Yunadi","Prasetya Heryanto Shadiq","Gilbert E.M Hutajulu","Resza Pahlawan Wibowo",
+"Eka Wahyu Nurhayati","Iva Alfiyanti","Rihan Maulana","Naufal Imam Maajid Perdana","Muhamad Kevin",
+"Esmeralda Sarahny Pulina","Khalifa Lyan Bohemianda","Ardian Nugroho","Dio Aditia Pratama","Achmad Adam Pebrianto","Alfath Rohmah Citra Ginnia",
+"Shafira Aulia Yasmine","Ricky Adrian","Fathur Rahman","Prayogi Aldino Fiqri","Atikah Suhaimah",
+"Avida Meidina Ahmad","Azzah Afifah Veronica","Bryan Christian C","Carmelia Yunita Tambuwun","Danang Saputro Aji","Erna Wati","Marliana Dwi Putri",
+"Nafisa Alia Putri","Raden Ayu Dela U. S","Rafiqro Setiawan","Rizki Arif Darmawan","Yovita Margareth A. P","Zahra Amelia","Raymond Jordan Sipayung","Rohman Rizki Wahyu Oetomo","Achmad Suryo Adi","Nabila Septiarina","Nur Fitriani","Tevin Chamboty","Agung Setiawan","Widya Surya Irawan","Siska Vinia Sihite","Shintia Nur Afifah","Rani Juli Zarni","Satria Darmawan","Reihan Pratama","Sarah Simanjuntak","Fauhan Nurfajrina","Palty Reno","Wahyu Anggara","Ahmad Faisal","Maruli Agustina Siagian","M. Ikhsan Haikal","Anjani Lumban Gaol","Siti Hardiyanti Astianti","Pito Khirahman","Anisa Nurul Safitri","Vina Yanuar P","Tesa Rizki L","M Faiz Satrio P","Mariana Sinaga","Nadia Utami","Teguh Ardama","Denisa Viola","Elsa Kurnia","Rahmalita","Delis Anggraeni Permana","Sri Mulyati","Larasati Arimi","Fariz Azzami","Karina Sekarasti",
+"M arfan","Habib fauzan Akbar","M. Ilyasha","Egi istas pratama"
+
 ];
 
 function showSuggestions(inputId, listId) {
